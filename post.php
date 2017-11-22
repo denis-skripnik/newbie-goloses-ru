@@ -16,11 +16,29 @@ use \Michelf\Markdown;
 include 'golos/getvotes.php';
 foreach ($result as $key => $value) {
 ?>
+
+<!DOCTYPE html>
 <html>
-<meta charset="UTF-8">
-<title><?php echo $value['title']; ?></title>
+<head>
+	<meta charset="utf-8" />
+	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+	<title><?php echo $value['title']; ?></title>
+	<meta name="keywords" content="Голос, Клиент, помощь, новички" />
+	<meta name="description" content="Новый клиент для Блокчейна Голос, созданный в помощь новичкам." />
+	<link href="style.css" rel="stylesheet">
 </head>
+
 <body>
+
+<div class="wrapper">
+
+	<header class="header">
+<h1>В помощь новичкам</h1>
+<p>Данный сайт создан, чтобы сторожилы узнали о новичках, об их постах, могли поставить апвоут, поддержав их.</p>
+<p>Ниже находятся вкладки: посты новичков, используя которую вы можете просматривать записи новичков Голоса, а также "Список новичков" со списком имён пользователей + ссылки на них. Для голосования используется ссылка на goldvoice.</p>
+	</header><!-- .header-->
+
+	<main class="content">
 <?php
 $my_html = Markdown::defaultTransform($value['body']);
 	$voit_url = "http://185.203.243.142/api/?method=getvotes&permlink=";
@@ -37,5 +55,15 @@ $voit_result = json_decode($voit_data);
 <p align="center"><a href="https://goldvoice.club/@'.$value['author'].'/'.$value['permlink'].'" target="_blank">Проголосовать за пост на Goldvoice</a></p>';
 }
 ?>
+	</main><!-- .content -->
+
+</div><!-- .wrapper -->
+
+<footer class="footer">
+<p>newbie.goloses.ru - это клиент в помощь новичкам, созданный на основе библиотеки <a href="https://golos.io/@golosapi2" target="_blank">PHPGolosAPI 2.0</a> (Благодарность автору этого решения).</p>
+<p>Создал данный клиент незрячий новичок в программировании <a href="https://goldvoice.club/@denis-skripnik" target="_blank">Денис Скрипник</a>. <a href="http://newbie.goloses.ru/newbie.goloses.ru.zip" target="_blank">Скачать архив с файлами скрипта</a></p>
+<p>Благодарность за помощь в создании навигации постраничной и исправлении ошибки при нахождении на главной <a href="https://golos.io/@tristamoff" target="_blank">@tristamoff</a>.</p>
+</footer><!-- .footer -->
+
 </body>
 </html>
