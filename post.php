@@ -26,7 +26,8 @@ foreach ($result as $key => $value) {
 	<meta name="keywords" content="Голос, Клиент, помощь, новички" />
 	<meta name="description" content="Новый клиент для Блокчейна Голос, созданный в помощь новичкам." />
 	<link href="style.css" rel="stylesheet">
-</head>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	</head>
 
 <body>
 
