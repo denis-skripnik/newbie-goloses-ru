@@ -53,7 +53,7 @@ $voit_result = json_decode($voit_data);
 Дата: <span>'.$value['created']['date'].'</span><br />
 Голосов: '.count($voit_result).'</p>
 <div id="content">'.$my_html.'</div>
-<p align="center"><a href="https://goldvoice.club/@'.$value['author'].'/'.$value['permlink'].'" target="_blank">Проголосовать за пост на Goldvoice</a></p>';
+<p align="center">Проголосовать за пост на <a href="https://golos.io/'.$value['parent_permlink'].'/@'.$value['author'].'/'.$value['permlink'].'">Golos.io</a> или <a href="https://goldvoice.club/@'.$value['author'].'/'.$value['permlink'].'" target="_blank">Goldvoice</a></p>';
 }
 ?>
 	</main><!-- .content -->
