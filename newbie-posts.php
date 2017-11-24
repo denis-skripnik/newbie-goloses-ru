@@ -29,7 +29,7 @@ foreach ($result as $key => $value) {
     }
 }
 
-echo '<table><tr><th>Автор</th><th>Заголовок поста</th><th>Голосов</th></tr>';
+echo '<table><tr><th>Автор</th><th>Заголовок поста с ссылкой на этом сайте</th><th>Ссылка на golos.io</th><th>Ссылка на goldvoice</th><th>Голосов</th></tr>';
 include 'golos/getvotes.php';
 foreach($pagedData AS $item) {
     $voit_url = "http://185.203.243.142/api/?method=getvotes&permlink=";
@@ -38,10 +38,12 @@ foreach($pagedData AS $item) {
     curl_setopt($voit_curl, CURLOPT_RETURNTRANSFER, 1); // Записать http ответ в переменную, а не выводить в буфер
     $voit_data = curl_exec($voit_curl);
     $voit_result = json_decode($voit_data);
-    echo '<tr>
+echo '<tr>
         <td><a href="https://goldvoice.club/@'.$item['author'].'" target="_blank">@'.$item['author'].'</a></td>
         <td><h2><a href="/post.php?permlink='.$item['permlink'].'&author='.$item['author'].'">'.$item['title'].'</a></h2></td>
-        <td>'.count($voit_result).'</td>
+                <td><a href="https://golos.io/'.$item['parent_permlink'].'/@'.$item['author'].'/'.$item['permlink'].'">Открыть на golos.io</a></td>        
+		<td><a href="https://goldvoice.club/@'.$item['author'].'/'.$item['permlink'].'">Открыть на Goldvoice.club</a></td>        
+		<td>'.count($voit_result).'</td>
     </tr>';
 }
 echo '</table>';
