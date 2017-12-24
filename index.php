@@ -18,7 +18,7 @@
 <h1>В помощь новичкам</h1>
 <p>Данный сайт создан, чтобы сторожилы узнали о новичках, об их постах, могли поставить апвоут, поддержав их.</p>
 <p>Ниже находятся вкладки: посты новичков, используя которую вы можете просматривать записи новичков Голоса, а также "Список новичков" со списком имён пользователей + ссылки на них. Для голосования используется ссылка на goldvoice.</p>
-	</header><!-- .header-->
+	</header>
 
 	<main class="content">
 <div id="tab_block">
@@ -38,35 +38,35 @@
 </div>
 
 <script type="text/javascript">
-//функция funcTab(n) вызывается событием onclick на вкладке. N - номер вкладки, на которой кликнули
+var numberOfTab = localStorage.getItem('number');
+if (numberOfTab) {
+funcTab(numberOfTab);
+} else {
+localStorage.setItem('number', 1);
+};
+
 function funcTab(n) {
-//получаем количество вкладок по классу. В нашем случае их - 4
-   var NTab = document.getElementsByClassName('tab').length;
-//запускаем цикл по количеству табов. Начинаем с 1, а не 0, чтобы удобнее было подставлять значение счетчика в айдишники
-  for (var i=1; i < NTab+1; i++) {
-//если значение счетчика цикла не равно номеру вкладки, на которую кликаем
-    if (i != n){
-//текущая вкладка может быть активна или не активна, поэтому для гарантии делаем текущую вкладку все равно не активной, пропуская вкладку, на которой кликнули
-     document.getElementById('tab'+i).className = 'tab';
-//тоже самое делаем для блоков с контентом
-     document.getElementById('tab_content'+i).className = 'tab_content'
-     }
-  }
-//теперь делаем таб, на котором кликнули, активным, меняя у него класс
-   document.getElementById('tab'+n).className = 'tab active';
-//тоже самое для блока с контентом
-   document.getElementById('tab_content'+n).className = 'tab_content active';
+var NTab = document.getElementsByClassName('tab').length;
+for (var i=1; i < NTab+1; i++) {
+if (i != n){
+document.getElementById('tab'+i).className = 'tab';
+document.getElementById('tab_content'+i).className = 'tab_content'
+}
+}
+document.getElementById('tab'+n).className = 'tab active';
+document.getElementById('tab_content'+n).className = 'tab_content active';
+localStorage.setItem('number', n);
 }
 </script>
-	</main><!-- .content -->
+	</main>
 
-</div><!-- .wrapper -->
+</div>
 
 <footer class="footer">
 <p>newbie.goloses.ru - это клиент в помощь новичкам, созданный на основе библиотеки <a href="https://golos.io/@golosapi2" target="_blank">PHPGolosAPI 2.0</a> (Благодарность автору этого решения).</p>
 <p>Создал данный клиент незрячий новичок в программировании <a href="https://goldvoice.club/@denis-skripnik" target="_blank">Денис Скрипник</a>. <a href="https://github.com/denis-skripnik/newbie-goloses-ru" target="_blank">Ссылка на github рипозеторий</a></p>
 <p>Благодарность за помощь в создании навигации постраничной и исправлении ошибки при нахождении на главной <a href="https://golos.io/@tristamoff" target="_blank">@tristamoff</a>.</p>
-</footer><!-- .footer -->
+</footer>
 
 </body>
 </html>

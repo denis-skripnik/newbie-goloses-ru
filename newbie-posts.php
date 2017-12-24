@@ -8,7 +8,7 @@ $page = curl_exec($curl);
 $result = json_decode($page, true);
 // Получаем текущую страницу
 if (!empty($_REQUEST['page'])) {
-    $currentPage = trim($_REQUEST['page']);
+$currentPage = trim($_REQUEST['page']);
     $currentPage = (int) $currentPage;
 } else {
     $currentPage = 0;

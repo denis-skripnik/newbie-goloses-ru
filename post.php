@@ -7,12 +7,19 @@ include 'golos/getpost.php';
     $page = curl_exec($curl);
 $result = json_decode($page, true);
 
-spl_autoload_register(function($class){
-	require 'Michelf/'.preg_replace('{\\\\|_(?!.*\\\\)}', DIRECTORY_SEPARATOR, ltrim($class, '\\')).'.php';
-});
 
-// Get Markdown class
-use \Michelf\Markdown;
+require_once('vendor/autoload.php');
+
+function generate_html_text($markdown_text){
+    $parsedown = new Parsedown();
+    $parsedown->setBreaksEnabled(true);
+    return $parsedown->text($markdown_text);
+}
+
+function make_image_from_inline_code($text){
+    
+}
+
 include 'golos/getvotes.php';
 foreach ($result as $key => $value) {
 ?>
@@ -41,7 +48,7 @@ foreach ($result as $key => $value) {
 
 	<main class="content">
 <?php
-$my_html = Markdown::defaultTransform($value['body']);
+$markdown_text = generate_html_text($value['body']);
 	$voit_url = "http://185.203.243.142/api/?method=getvotes&permlink=";
 $voit_address = $voit_url.$value['permlink'].'&author='.$value['author'];
     $voit_curl = curl_init($voit_address); // Инициализируем curl по указанному адресу
@@ -52,7 +59,7 @@ $voit_result = json_decode($voit_data);
 <p align="center">Автор: <a href="https://goldvoice.club/@'.$value['author'].'" target="_blank">'.$value['author'].'</a><br />
 Дата: <span>'.$value['created']['date'].'</span><br />
 Голосов: '.count($voit_result).'</p>
-<div id="content">'.$my_html.'</div>
+<div id="content">'.$markdown_text.'</div>
 <p align="center">Проголосовать за пост на <a href="https://golos.io/'.$value['parent_permlink'].'/@'.$value['author'].'/'.$value['permlink'].'">Golos.io</a> или <a href="https://goldvoice.club/@'.$value['author'].'/'.$value['permlink'].'" target="_blank">Goldvoice</a></p>';
 }
 ?>
