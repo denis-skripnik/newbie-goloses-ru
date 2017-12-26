@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-if ($_GET['page'] >=1) {
+if (isset($_GET['page']) && $_GET['page'] >=1) {
 $url_page = "http://185.203.243.142/api/?method=getnewbies&count=30";
 $url = $url_page."&offset=".$_GET['page']*30;
 }
