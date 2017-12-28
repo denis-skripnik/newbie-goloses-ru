@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
 	<title>В помощь новичкам</title>
-	<meta name="keywords" content="Голос, Клиент, помощь, новички" />
-	<meta name="description" content="Новый клиент для Блокчейна Голос, созданный в помощь новичкам." />
-	<link href="style.css" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+	<meta name="keywords" content="Голос, Клиент, помощь, новички">
+	<meta name="description" content="Новый клиент для Блокчейна Голос, созданный в помощь новичкам.">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/style.min.css" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="https://newbie.goloses.ru/favicon.ico">
+<link rel="stylesheet" href="css/stacktable.css">
 	</head>
 
 <body>
@@ -59,14 +59,22 @@ localStorage.setItem('number', n);
 }
 </script>
 	</main>
+<footer class="footer">
+    <p class="footer_text">newbie.goloses.ru - это клиент в помощь новичкам, созданный на основе библиотеки <a href="https://golos.io/@golosapi2" target="_blank">PHPGolosAPI 2.0</a> (Благодарность автору этого решения).</p>
+    <p class="footer_text">Создал данный клиент незрячий новичок в программировании <a href="https://goldvoice.club/@denis-skripnik" target="_blank">Денис Скрипник</a>. <a href="https://github.com/denis-skripnik/newbie-goloses-ru" target="_blank">Ссылка на github рипозеторий</a></p>
+    <p class="footer_text">Благодарность за помощь в создании навигации постраничной и исправлении ошибки при нахождении на главной <a href="https://golos.io/@tristamoff" target="_blank">@tristamoff</a>.</p>
+  </footer>
 
 </div>
 
-<footer class="footer">
-<p>newbie.goloses.ru - это клиент в помощь новичкам, созданный на основе библиотеки <a href="https://golos.io/@golosapi2" target="_blank">PHPGolosAPI 2.0</a> (Благодарность автору этого решения).</p>
-<p>Создал данный клиент незрячий новичок в программировании <a href="https://goldvoice.club/@denis-skripnik" target="_blank">Денис Скрипник</a>. <a href="https://github.com/denis-skripnik/newbie-goloses-ru" target="_blank">Ссылка на github рипозеторий</a></p>
-<p>Благодарность за помощь в создании навигации постраничной и исправлении ошибки при нахождении на главной <a href="https://golos.io/@tristamoff" target="_blank">@tristamoff</a>.</p>
-</footer>
 
-</body>
-</html>
+<script type="text/javascript" src="js/libs/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/stacktable.js"></script>
+<script>
+jQuery(document).ready(function($) {
+  jQuery(function($){
+    $('table').stacktable();
+  });
+});
+</script>
+</body></html>
