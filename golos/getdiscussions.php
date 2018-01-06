@@ -19,7 +19,14 @@ class APICall_getdiscussions extends APICall
 		$to = '';
 		if(array_key_exists('ignore_body', $params) and !array_key_exists('count', $params))
 		{
-				$top = 500;		
+			if(array_key_exists('tags', $params))
+			{
+				$top = 1500;
+			}
+			else
+			{
+				$top = 100;	
+			}					
 		}
 		else
 		{
@@ -104,11 +111,11 @@ class APICall_getdiscussions extends APICall
 		}
 		if(array_key_exists('ignore_body', $params))
 		{
-			$sql = "select $top ID, author, permlink, parent_author, parent_permlink, title, json_metadata, active_votes, last_update, pending_payout_value, total_pending_payout_value, total_payout_value, created from Comments where parent_author = '' $title $category $from $to $exclude_category $author order by $order $offset";
+			$sql = "select $top ID, author, permlink, parent_author, parent_permlink, title, json_metadata, active_votes, last_update, pending_payout_value, total_pending_payout_value, total_payout_value, created, net_rshares, abs_rshares, vote_rshares, total_vote_weight, reward_weight, total_payout_value, pending_payout_value, total_pending_payout_value from Comments WITH (NOLOCK) where parent_author = '' $title $category $from $to $exclude_category $author order by $order $offset";
 		}
 		else
 		{
-			$sql = "select $top * from Comments where body not LIKE '@@%' and parent_author = '' $title $category $from $to $exclude_category $author order by $order $offset";
+			$sql = "select $top * from Comments WITH (NOLOCK) where body not LIKE '@@%' and parent_author = '' $title $category $from $to $exclude_category $author order by $order $offset";
 		}
 		
 		$out = array();
@@ -213,6 +220,16 @@ class APICall_getdiscussions extends APICall
 			{
 				$data['tags'] = "nsfw";
 			}	
+			
+			$data['net_rshares'] = $row['net_rshares'];
+			$data['abs_rshares'] = $row['abs_rshares'];
+			$data['vote_rshares'] = $row['vote_rshares'];
+			$data['total_vote_weight'] = $row['total_vote_weight'];
+			$data['reward_weight'] = $row['reward_weight'];
+			$data['total_payout_value'] = $row['total_payout_value']; 
+			$data['pending_payout_value'] = $row['pending_payout_value'];
+			$data['total_pending_payout_value'] = $row['total_pending_payout_value'];
+			
 			$out[] = $data;
 		}
 		echo json_encode($out);

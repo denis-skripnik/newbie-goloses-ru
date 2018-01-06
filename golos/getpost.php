@@ -9,14 +9,15 @@ class APICall_getpost extends APICall
 	public function query($params = array())
 	{
 		parent::query($params);
-		if(array_key_exists('permlink', $params))
+		if(array_key_exists('permlink', $params) and array_key_exists('author', $params))
 		{
 			$permlink = $params['permlink'];
-			$sql = "select top 1 * from Comments where permlink = '$permlink' and parent_author = '' order by ID desc";
+			$author = $params['author'];
+			$sql = "select top 1 * from Comments WITH (NOLOCK) where permlink = '$permlink' and parent_author = '' and author = '$author' order by ID desc";
 		}
 		else
 		{
-			$sql = "select top 1 * from Comments where parent_author = '' order by id desc";
+			$sql = "select top 1 * from Comments WITH (NOLOCK)  where parent_author = '' order by id desc";
 		}
 		
 		$out = array();

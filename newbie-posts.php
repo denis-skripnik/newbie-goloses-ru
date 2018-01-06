@@ -1,11 +1,11 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 if (isset($_GET['page']) && $_GET['page'] >=1) {
-$url_page = "http://185.203.243.142/api/?method=getnewbies&count=30";
+$url_page = "https://newbie.goloses.ru/golos/?method=getnewbies&count=30";
 $url = $url_page."&offset=".$_GET['page']*30;
 }
 else {
-$url = "http://185.203.243.142/api/?method=getnewbies&count=30&offset=0";
+$url = "https://newbie.goloses.ru/golos/?method=getnewbies&count=30&offset=0";
 }
 $curl = curl_init($url); // Инициализируем curl по указанному адресу
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // Записать http ответ в переменную, а не выводить в буфер

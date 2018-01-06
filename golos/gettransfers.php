@@ -60,9 +60,16 @@ class APICall_gettransfers extends APICall
 		{
 			$top = "top $top";
 		}
-		
+		if(array_key_exists('amount', $params))	
+		{
+			$sum = " and amount = {$params['sum']}";
+		}
+		else
+		{
+			$sum = '';
+		}
 		$transactions = array();
-		$sql = "select $top * from TxTransfers WITH (NOLOCK) where type = 'transfer' $from $to $from_date $to_date order by $order $offset"; 
+		$sql = "select $top * from TxTransfers WITH (NOLOCK) where type = 'transfer' $from $to $from_date $to_date $sum order by $order $offset"; 
 		if(array_key_exists('sql', $params))
 		{
 			$transactions[] = $sql;

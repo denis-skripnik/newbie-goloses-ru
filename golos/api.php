@@ -18,7 +18,13 @@ class APICall
 
 		$this->ms = sqlsrv_connect( $serverName, $connectionOptions );
 		if( $this->ms === false ) {
-			die( FormatErrors( sqlsrv_errors()));
+			if( ($errors = sqlsrv_errors() ) != null) {
+			foreach( $errors as $error ) {
+				echo "SQLSTATE: ".$error[ 'SQLSTATE']."<br />";
+				echo "code: ".$error[ 'code']."<br />";
+				echo "message: ".$error[ 'message']."<br />";
+			}
+    }
 		}
 	}
 	
@@ -29,7 +35,7 @@ class APICall
 	
 	public function query($params = array())
 	{
-		return '';
+		header('Access-Control-Allow-Origin: *');  
 	}
 }
 ?>

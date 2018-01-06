@@ -20,7 +20,5 @@ if(file_exists($method . '.php'))
 		echo "{error: invalid result}";
 		return;
 	}
-	echo json_encode($result);
+	echo $result;
 }
-
-?>

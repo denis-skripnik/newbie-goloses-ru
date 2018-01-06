@@ -1,5 +1,5 @@
 <?php
-	$url1 = "http://185.203.243.142/api/?method=getpost&permlink=";
+	$url1 = "https://newbie.goloses.ru/golos/?method=getpost&permlink=";
 	$url = $url1.$_GET['permlink']."&author=".$_GET['author'];
     $curl = curl_init($url); // Инициализируем curl по указанному адресу
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // Записать http ответ в переменную, а не выводить в буфер
@@ -19,7 +19,6 @@ function make_image_from_inline_code($text){
     
 }
 
-include 'golos/getvotes.php';
 foreach ($result as $key => $value) {
 ?>
 <!DOCTYPE html>
@@ -48,7 +47,7 @@ foreach ($result as $key => $value) {
 	<main class="content post_content">
 	<?php
 $markdown_text = generate_html_text($value['body']);
-	$voit_url = "http://185.203.243.142/api/?method=getvotes&permlink=";
+	$voit_url = "https://newbie.goloses.ru/golos/?method=getvotes&permlink=";
 $voit_address = $voit_url.$value['permlink'].'&author='.$value['author'];
     $voit_curl = curl_init($voit_address); // Инициализируем curl по указанному адресу
     curl_setopt($voit_curl, CURLOPT_RETURNTRANSFER, 1); // Записать http ответ в переменную, а не выводить в буфер

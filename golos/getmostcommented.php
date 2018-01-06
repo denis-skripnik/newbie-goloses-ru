@@ -1,10 +1,9 @@
 <?php 
 //error_reporting(E_ALL) ;
 //ini_set('display_errors', 'On');
-
 require_once('api.php');
 
-class APICall_getnewbies extends APICall
+class APICall_getmostcommented extends APICall
 {
 	public function query($params = array())
 	{
@@ -19,7 +18,7 @@ class APICall_getnewbies extends APICall
 		$to = '';
 		if(array_key_exists('ignore_body', $params) and !array_key_exists('count', $params))
 		{
-				$top = 500;		
+			$top = 200;		
 		}
 		else
 		{
@@ -104,15 +103,13 @@ class APICall_getnewbies extends APICall
 		}
 		if(!array_key_exists('ignore_body', $params))
 		{
-			$sql = "select $top * from Comments WITH (NOLOCK) where body not LIKE '@@%' and parent_author = '' and title <> '' and author in (select author from Comments WITH (NOLOCK) group by author having count(author) < 3) $title $category $from $to $exclude_category $author order by $order $offset";
+			$sql = "select $top * from Comments WITH (NOLOCK) where body not LIKE '@@%' and parent_author = '' and title <> '' and permlink in (select parent_permlink from Comments WITH (NOLOCK) group by parent_permlink having count(parent_permlink) > 10) $title $category $from $to $exclude_category $author order by $order $offset";
 		}
 		else
 		{
-			$sql = "select $top ID, author, permlink, parent_author, parent_permlink, title, json_metadata, active_votes, last_update, pending_payout_value, total_pending_payout_value, total_payout_value, created from Comments WITH (NOLOCK) where body not LIKE '@@%' and parent_author = '' and title <> '' and author in (select author from Comments WITH (NOLOCK) group by author having count(author) < 3) $title $category $from $to $exclude_category $author order by $order $offset";
+			$sql = "select $top ID, author, permlink, parent_author, parent_permlink, title, json_metadata, active_votes, last_update, pending_payout_value, total_pending_payout_value, total_payout_value, created from Comments WITH (NOLOCK) where body not LIKE '@@%' and parent_author = '' and title <> '' and permlink in (select parent_permlink from Comments WITH (NOLOCK) group by parent_permlink having count(parent_permlink) > 10) $title $category $from $to $exclude_category $author order by $order $offset";
 		}
-			
-		
-		
+
 		$out = array();
 		if(array_key_exists('sql', $params))
 		{

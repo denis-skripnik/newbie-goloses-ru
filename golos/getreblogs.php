@@ -4,7 +4,7 @@
 
 require_once('api.php');
 
-class APICall_getvotes extends APICall
+class APICall_getreblogs extends APICall
 {
 	public function query($params = array())
 	{
@@ -21,13 +21,11 @@ class APICall_getvotes extends APICall
 		}
 		
 		$votes = array();
-		$sql = "select * from dbo.TxVotes WITH (NOLOCK) where permlink = '$permlink' and author = '$author' order by timestamp"; 
+		$sql = "select * from dbo.Reblogs WITH (NOLOCK) where permlink = '$permlink' and author = '$author' order by timestamp"; 
 		$stmt = sqlsrv_query( $this->ms, $sql);
 		while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
 			$data = array();
-			$data['tx_id'] = $row['tx_id'];
-			$data['voter'] = $row['voter'];
-			$data['weight'] = $row['weight'];
+			$data['account'] = $row['account'];
 			$data['timestamp'] = $row['timestamp'];
 			$votes[] = $data;
 		}	
